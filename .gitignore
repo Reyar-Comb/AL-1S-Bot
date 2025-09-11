@@ -1,1 +1,4 @@
 .env
+bot/AL-1S-Bot/.env
+bot/AL-1S-Bot/.env.prod
+bot/AL-1S-Bot/docker/__pycache__/

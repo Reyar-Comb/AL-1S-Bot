@@ -1,0 +1,54 @@
+version: "3"
+
+x-config-host: &config-host ${HOST:-0.0.0.0}
+x-config-port: &config-port ${PORT:-8081}
+
+
+
+services:
+  bot:
+    build: 
+      context: ./bot/AL-1S-Bot
+      dockerfile: Dockerfile
+    container_name: nonebot
+    ports:
+      - *config-port
+    restart: always
+    env_file:
+      - ./bot/AL-1S-Bot/.env.prod
+    networks:
+      - botwork
+    depends_on:
+      - napcat
+    environment:
+      ENVIRONMENT: prod
+      HOST: *config-host
+      PORT: *config-port
+
+  napcat:
+    image: mlikiowa/napcat-docker:latest
+    container_name: napcat
+    restart: always
+    networks:
+      - botwork
+    ports:
+      - 3000:3000
+      - 3001:3001
+      - 6099:6099
+    environment:
+      - NAPCAT_UID=${NAPCAT_UID}
+      - NAPCAT_GID=${NAPCAT_GID}
+
+      
+
+
+networks:
+  botwork:
+    name: botwork
+
+
+
+
+
+
+

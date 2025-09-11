@@ -1,0 +1,15 @@
+# single-node napcat docker-compose file
+version: "3"
+services:
+    napcat:
+        environment:
+            - NAPCAT_UID=${NAPCAT_UID}
+            - NAPCAT_GID=${NAPCAT_GID}
+        ports:
+            - 3000:3000
+            - 3001:3001
+            - 6099:6099
+        container_name: napcat
+        network_mode: bridge
+        restart: always
+        image: mlikiowa/napcat-docker:latest
