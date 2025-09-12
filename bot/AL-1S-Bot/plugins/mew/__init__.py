@@ -22,7 +22,7 @@ mew = on_command("喵")
 @mew.handle()
 async def mew_handle(event: Event):
     id = event.get_user_id()
-    time.sleep(1)
+    time.sleep(2)
     if id == "2290197845":
         await mew.finish(MessageSegment.at(id) + MessageSegment.text(" 喵~"))
     else:
