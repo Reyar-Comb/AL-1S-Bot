@@ -26,4 +26,4 @@ async def mew_handle(event: Event):
     if id == "2290197845":
         await mew.finish(MessageSegment.at(id) + MessageSegment.text(" 喵~"))
     else:
-        await mew.finish(MessageSegment.at(id) + MessageSegment.text(" 装逼我让你飞起来"))
+        await mew.finish(MessageSegment.at(id) + MessageSegment.text(" 哈！"))
