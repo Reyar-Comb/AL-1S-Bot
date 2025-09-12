@@ -26,6 +26,7 @@ RUN chmod +x /start.sh
 
 ENV APP_MODULE _main:app
 ENV MAX_WORKERS 1
+ENV OTEL_ENABLED=false
 
 COPY --from=requirements_stage /tmp/bot.py /app
 COPY ./docker/_main.py /app
