@@ -31,6 +31,8 @@ jobs:
         # 使用更稳定的 SSH 连接方式
         ssh -o StrictHostKeyChecking=no -o ConnectTimeout=30 ${SERVER_USER}@${SERVER_HOST} << 'EOF'
           set -e  # 任何命令失败则退出
+
+          source ~/.bashrc
           
           # 开启代理
           clash on
