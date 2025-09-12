@@ -3,6 +3,7 @@ from nonebot.plugin import PluginMetadata
 from nonebot import on_command
 from nonebot.adapters.onebot.v11 import Message, MessageSegment, Event
 from .config import Config
+import time
 
 __plugin_meta__ = PluginMetadata(
     name="gif",
@@ -19,8 +20,9 @@ getGIF = on_command("gif")
 async def get_gif(event: Event):
     a = event.get_message()[0]
     if a.type != "image":
+        time.sleep(1)
         await getGIF.finish("主人发的好像不是表情呢qwq")
     else:
-        await getGIF.send("点开链接就能下载GIF啦!")
+        time.sleep(1)
         url = a.data["url"]
-        await getGIF.finish(url)
+        await getGIF.finish("点开链接就能下载GIF啦!\n" + url)
