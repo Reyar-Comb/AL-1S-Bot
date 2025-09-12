@@ -34,30 +34,6 @@ jobs:
 
           echo "hello"
           
-          source /opt/clash/script/common.sh
-          echo "loaded sh"
-          source /opt/clash/script/clashctl.sh
-          echo "loaded"
-          watch_proxy
-
-          echo "loaded"
-          
-          # 开启代理
-          clash on
-
-          echo "clash on "
-          
-          # 进入项目目录
-          cd /root/bot/AL-1S-Bot
-          
-          # 拉取最新代码
-          git pull origin main
-          
-          # 关闭代理
-          clash off
-          
-          echo "clash off"
-          
           # 检查 requirements.txt 是否在本次提交中发生变化
           if echo "${{ steps.changed-files.outputs.all_changed_files }}" | grep -q "requirements.txt"; then
             echo "requirements.txt 已变更，需要重新构建..."
