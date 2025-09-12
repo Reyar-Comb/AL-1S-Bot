@@ -32,7 +32,7 @@ jobs:
         ssh -o StrictHostKeyChecking=no -o ConnectTimeout=30 ${SERVER_USER}@${SERVER_HOST} << 'EOF'
           set -e  # 任何命令失败则退出
 
-          source ~/.bashrc
+          source /opt/clash/script/common.sh && source /opt/clash/script/clashctl.sh && watch_proxy
           
           # 开启代理
           clashctl on
