@@ -40,23 +40,23 @@ jobs:
           if echo "${{ steps.changed-files.outputs.all_changed_files }}" | grep -q "requirements.txt"; then
             echo "requirements.txt 已变更，需要重新构建..."
             # 执行构建并启动
-            docker-compose up -d --build
+            docker compose up -d --build
             # 等待一段时间让容器启动
             sleep 10
             # 输出 napcat 日志以供扫码登录
             echo "=== Napcat 日志 ==="
-            docker-compose logs napcat --tail=50
+            docker compose logs napcat --tail=50
           else
             echo "requirements.txt 未变更，仅重启 nonebot 服务..."
             # 仅重启 nonebot 容器
-            docker-compose restart nonebot
+            docker compose restart nonebot
             # 输出重启结果
             echo "=== 服务状态 ==="
-            docker-compose ps
+            docker compose ps
           fi
           
           # 输出最终的服务状态和最近日志
           echo "=== 最终服务状态 ==="
-          docker-compose ps
+          docker compose ps
           echo "=== NoneBot 最近日志 ==="
-          docker-compose logs nonebot --tail=20
+          docker compose logs nonebot --tail=20
