@@ -1,8 +1,7 @@
-
-#single-node nonebot docker-compose file
+version: "3"
 
 x-config-host: &config-host ${HOST:-0.0.0.0}
-x-config-port: &config-port ${PORT:-8081}
+x-config-port: &config-port ${PORT:-8080}
 
 services:
   nonebot:
@@ -16,4 +15,3 @@ services:
       HOST: *config-host
       PORT: *config-port
     restart: always
-    container_name: nonebot
