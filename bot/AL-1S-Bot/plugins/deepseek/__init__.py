@@ -22,7 +22,7 @@ deepseek = on_command("ds")
 def get_answer(message: str):
     client = OpenAI(api_key = config.api_key, base_url="https://api.deepseek.com") # type: ignore
     messages: list[ChatCompletionMessageParam] = [{"role": "system", "content": "你是游戏蔚蓝档案中千年科技学院的爱丽丝，是天真可爱的小萝莉，但实际上是个机器人。"}]
-
+    messages.append({"role": "user", "content": message})
     response = client.chat.completions.create(
         model = "deepseek-chat",
         messages = messages
