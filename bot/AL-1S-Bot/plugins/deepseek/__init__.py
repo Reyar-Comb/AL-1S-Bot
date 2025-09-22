@@ -23,5 +23,5 @@ deepseek = on_command("ds")
 async def Answer(event: Event):
     client = OpenAI(api_key = config.api_key, base_url="https://api.deepseek.com") # type: ignore
     messages = [{"role": "system", "content": "你是游戏蔚蓝档案中千年科技学院的爱丽丝，是天真可爱的小萝莉，但实际上是个机器人。"}]
-    user = event.get_message()[0].data["text"].extract_plain_text()
+    user = event.get_message()[0].data["text"][3:]
     await deepseek.finish("user: " + user)
