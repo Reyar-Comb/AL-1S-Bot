@@ -4,3 +4,6 @@ bot/AL-1S-Bot/.env.prod
 bot/AL-1S-Bot/__pycache__/
 bot/AL-1S-Bot/docker/__pycache__/
 bot/AL-1S-Bot/plugins/mew/__pycache__/
+bot/AL-1S-Bot/plugins/gif/__pycache__/
+bot/AL-1S-Bot/plugins/deepseek/__pycache__/
+bot/AL-1S-Bot/plugins/deepseek/chat.db
