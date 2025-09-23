@@ -51,12 +51,19 @@ async def Answer(event: Event):
 
         if " -debug" in user_message:
             answer = get_answer(user_message, mode="debug", user_id=user_id)
+
+        elif "-db show" in user_message:
+            await deepseek.finish(f"database:\n{db.show_db()}")
+            answer = None
+
+        elif "-db clear" in user_message:
+            db.clear_db()
+            await deepseek.finish("邦邦卡邦！爱丽丝失忆了哦！")
+            answer = None     
+
         else:
             answer = get_answer(user_message, mode="normal")
         
-        if "-db" in user_message:
-            await deepseek.finish(f"database:\n{db.show_db()}")
-            answer = None
 
         if answer:
             await deepseek.finish(answer)
