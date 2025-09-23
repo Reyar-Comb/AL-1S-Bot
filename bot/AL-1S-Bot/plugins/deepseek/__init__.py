@@ -28,10 +28,10 @@ def get_answer(user_message: str, mode: str = "normal", user_id: str = 'unknown'
     messages: list[ChatCompletionMessageParam] = [{"role": "system", "content": config.system_prompt}] # type: ignore
 
     total_message = f"以下是用户本次的发言\n{db.get_user_message(user_id)}\n \
-                      以下是该用户的自我介绍介绍\n{db.get_user_intro(user_id)}\n \
-                      以下是你与该用户最近的聊天记录\n{db.get_user_message(user_id)}\n \
-                      以下是你与所有用户最近的聊天记录\n{db.get_all_message()}\n \
-                      请基于以上信息来回应用户"
+        以下是该用户的自我介绍介绍\n{db.get_user_intro(user_id)}\n \
+            以下是你与该用户最近的聊天记录\n{db.get_user_message(user_id)}\n \
+                以下是你与所有用户最近的聊天记录\n{db.get_all_message()}\n \
+                    请基于以上信息来回应用户"
     
     messages.append({"role": "user", "content": total_message})
     response = client.chat.completions.create(
@@ -77,7 +77,7 @@ async def Answer(event: Event):
         elif "-help" in user_message:
             sleep(1)
             await deepseek.finish("输入/ds 后就可以直接跟爱丽丝聊天哦~\n \
-                                   如果想要爱丽丝认识你，可以使用\"/ds -register 你的自我介绍\"来告诉爱丽丝你是谁哦~")
+                                  如果想要爱丽丝认识你，可以使用\"/ds -register 你的自我介绍\"来告诉爱丽丝你是谁哦~")
 
         elif "-register" in user_message:
             if "clear" in user_message and user_id == config.admin_id: # type: ignore

@@ -42,7 +42,7 @@ def get_user_intro(user_id: str) -> str:
     with closing(sqlite3.connect(db_path)) as conn:
         cursor = conn.execute(
             'SELECT intro FROM users WHERE user_id = ?', 
-            (user_id)
+            (user_id,)
         )
         row = cursor.fetchone()
         return row[0] if row else "null"
@@ -51,7 +51,7 @@ def get_user_description(user_id: str) -> str:
     with closing(sqlite3.connect(db_path)) as conn:
         cursor = conn.execute(
             'SELECT description FROM users WHERE user_id = ?', 
-            (user_id)
+            (user_id,)
         )
         row = cursor.fetchone()
         return row[0] if row else ""
@@ -60,7 +60,7 @@ def get_user_message(user_id: str) -> str:
     with closing(sqlite3.connect(db_path)) as conn:
         cursor = conn.execute(
             'SELECT message, timestamp, answer FROM chat_history WHERE user_id = ? ORDER BY timestamp DESC LIMIT 20', 
-            (user_id)
+            (user_id,)
         )
         rows = cursor.fetchall()
         messages = []
@@ -104,7 +104,7 @@ def show_db():
     with closing(sqlite3.connect(db_path)) as conn:
         cursor = conn.execute('SELECT user_id, message, answer, timestamp FROM chat_history ORDER BY timestamp DESC LIMIT 10')
         rows = cursor.fetchall()
-        return os.path.abspath(db_path) + "\n".join([f'user: {short(row[0])} \nmessage: {short(row[1])} \nanswer: {short(row[2])} \ntimastamp: {row[3]}' for row in rows])
+        return os.path.abspath(db_path) + "\n" + "\n".join([f'user: {short(row[0])} \nmessage: {short(row[1])} \nanswer: {short(row[2])} \ntimestamp: {row[3]}' for row in rows])
 
 def clear_db():
     with closing(sqlite3.connect(db_path)) as conn:
