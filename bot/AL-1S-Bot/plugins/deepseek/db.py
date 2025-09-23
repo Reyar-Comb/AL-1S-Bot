@@ -5,7 +5,7 @@ from contextlib import closing
 from .tools import short
 import os
 
-db_path = os.path.join(os.path.dirname(__file__), "chat.db")
+db_path = "/app/plugins/deepseek/chat.db"
 
 def init_db():
     with closing(sqlite3.connect(db_path)) as conn:
