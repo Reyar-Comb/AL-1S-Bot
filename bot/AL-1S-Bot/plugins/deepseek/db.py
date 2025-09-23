@@ -5,7 +5,7 @@ from contextlib import closing
 from .tools import short
 
 def init_db():
-    with closing(sqlite3.connect('chat.db')) as conn:
+    with closing(sqlite3.connect('deepseek.db')) as conn:
         with conn:
             conn.execute('''
                 CREATE TABLE IF NOT EXISTS chat_history (
