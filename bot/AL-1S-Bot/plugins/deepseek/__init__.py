@@ -27,11 +27,11 @@ def get_answer(user_message: str, mode: str = "normal", user_id: str = 'unknown'
     #system prompt
     messages: list[ChatCompletionMessageParam] = [{"role": "system", "content": config.system_prompt}] # type: ignore
 
-    total_message = f"以下是用户本次的发言\n{db.get_user_message(user_id)}\n \
-        以下是该用户的自我介绍介绍\n{db.get_user_intro(user_id)}\n \
-            以下是你与该用户最近的聊天记录\n{db.get_user_message(user_id)}\n \
-                以下是你与所有用户最近的聊天记录\n{db.get_all_message()}\n \
-                    请基于以上信息来回应用户"
+    total_message = f"以下是用户本次的发言\n{user_message}\n \
+    以下是该用户的自我介绍介绍\n{db.get_user_intro(user_id)}\n \
+    以下是你与该用户最近的聊天记录\n{db.get_user_message(user_id)}\n \
+    以下是你与所有用户最近的聊天记录\n{db.get_all_message()}\n \
+    请基于以上信息来回应用户"
     
     messages.append({"role": "user", "content": total_message})
     response = client.chat.completions.create(
