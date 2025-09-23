@@ -6,7 +6,7 @@ from .config import Config
 from openai import OpenAI
 from openai.types.chat import ChatCompletionMessageParam
 
-import db
+from . import db
 
 
 __plugin_meta__ = PluginMetadata(
