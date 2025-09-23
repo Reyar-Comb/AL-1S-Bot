@@ -89,7 +89,7 @@ def show_db():
     with closing(sqlite3.connect('chat.db')) as conn:
         cursor = conn.execute('SELECT user_id, message, answer, timestamp FROM chat_history ORDER BY timestamp DESC LIMIT 10')
         rows = cursor.fetchall()
-        return "\n".join([f'user: {short(row[0])} message: {short(row[1])} answer: {short(row[2])} timastamp: {row[3]}' for row in rows])
+        return "\n".join([f'user: {short(row[0])} \nmessage: {short(row[1])} \nanswer: {short(row[2])} \ntimastamp: {row[3]}' for row in rows])
 
 def clear_db():
     with closing(sqlite3.connect('chat.db')) as conn:

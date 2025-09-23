@@ -62,7 +62,7 @@ async def Answer(event: Event):
             answer = None     
 
         else:
-            answer = get_answer(user_message, mode="normal")
+            answer = get_answer(user_message, mode="normal", user_id=user_id)
         
 
         if answer:
