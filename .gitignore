@@ -6,5 +6,5 @@ bot/AL-1S-Bot/docker/__pycache__/
 bot/AL-1S-Bot/plugins/mew/__pycache__/
 bot/AL-1S-Bot/plugins/gif/__pycache__/
 bot/AL-1S-Bot/plugins/deepseek/__pycache__/
-bot/AL-1S-Bot/plugins/deepseek/deepseek.db
+bot/AL-1S-Bot/plugins/deepseek/chat.db
 bot/AL-1S-Bot/plugins/deepseek/config.py
