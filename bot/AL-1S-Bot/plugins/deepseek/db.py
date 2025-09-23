@@ -66,7 +66,7 @@ def get_user_message(user_id: str) -> str:
         messages = []
         for message, timestamp, answer in reversed(rows):
             dt = datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S")
-            messages.append({"时间": dt, "用户": message, "AI": answer})
+            messages.append({"时间": str(dt), "用户": message, "AI": answer})
         return json.dumps(messages, ensure_ascii=False)
     
 def get_all_message() -> str:
@@ -78,7 +78,7 @@ def get_all_message() -> str:
         messages = []
         for user_id, message, timestamp, answer in reversed(rows):
             dt = datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S")
-            messages.append({"时间": dt, "用户ID": user_id, "用户": message, "AI": answer})
+            messages.append({"时间": str(dt), "用户ID": user_id, "用户": message, "AI": answer})
         return json.dumps(messages, ensure_ascii=False)
     
 def update_user_intro(user_id: str, intro: str):
