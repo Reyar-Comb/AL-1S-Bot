@@ -21,7 +21,7 @@ def init_db():
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     user_id TEXT NOT NULL,
                     intro TEXT,
-                    description TEXT,
+                    description TEXT
                 )
             ''')
             conn.commit()
