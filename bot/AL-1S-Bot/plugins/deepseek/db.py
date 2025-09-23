@@ -3,6 +3,7 @@ import json
 from datetime import datetime
 from contextlib import closing
 from .tools import short
+import os
 
 def init_db():
     with closing(sqlite3.connect('deepseek.db')) as conn:
@@ -89,7 +90,7 @@ def show_db():
     with closing(sqlite3.connect('deepseek.db')) as conn:
         cursor = conn.execute('SELECT user_id, message, answer, timestamp FROM chat_history ORDER BY timestamp DESC LIMIT 10')
         rows = cursor.fetchall()
-        return "\n".join([f'user: {short(row[0])} \nmessage: {short(row[1])} \nanswer: {short(row[2])} \ntimastamp: {row[3]}' for row in rows])
+        return os.path.abspath('deepseek.db') + "\n".join([f'user: {short(row[0])} \nmessage: {short(row[1])} \nanswer: {short(row[2])} \ntimastamp: {row[3]}' for row in rows])
 
 def clear_db():
     with closing(sqlite3.connect('deepseek.db')) as conn:
