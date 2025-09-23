@@ -1,4 +1,4 @@
 def short(message: str) -> str:
-    if len(message) > 15:
-        return message[:15] + "..."
+    if len(message) > 25:
+        return message[:25] + "..."
     return message
