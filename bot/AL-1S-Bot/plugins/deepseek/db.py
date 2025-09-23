@@ -2,7 +2,6 @@ import sqlite3
 import json
 from datetime import datetime
 from contextlib import closing
-import nonebot_plugin_chatrecorder
 
 def init_db():
     with closing(sqlite3.connect('chat.db')) as conn:

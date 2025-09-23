@@ -6,6 +6,7 @@ from .config import Config
 from openai import OpenAI
 from openai.types.chat import ChatCompletionMessageParam
 
+import db
 
 
 __plugin_meta__ = PluginMetadata(
@@ -21,7 +22,7 @@ deepseek = on_command("ds")
 
 def get_answer(message: str, mode: str = "normal"):
     client = OpenAI(api_key = config.api_key, base_url="https://api.deepseek.com") # type: ignore
-    messages: list[ChatCompletionMessageParam] = [{"role": "system", "content": "你是游戏蔚蓝档案中千年科技学院的爱丽丝，是天真可爱的小萝莉，但实际上是个机器人。"}]
+    messages: list[ChatCompletionMessageParam] = [{"role": "system", "content": config.system_prompt}] # type: ignore
     messages.append({"role": "user", "content": message})
     response = client.chat.completions.create(
         model = "deepseek-chat",
@@ -38,15 +39,18 @@ def get_answer(message: str, mode: str = "normal"):
         )
 @deepseek.handle()
 async def Answer(event: Event):
-    
-    user = event.get_message()[0].data["text"][3:]
+    try:
+        user = event.get_message()[0].data["text"][3:]
 
-    if " -debug" in user:
-        answer = get_answer(user, mode="debug")
-    else:
-        answer = get_answer(user, mode="normal")
+        if " -debug" in user:
+            answer = get_answer(user, mode="debug")
+        else:
+            answer = get_answer(user, mode="normal")
+        
+        if answer:
+            await deepseek.finish(answer)
+        else:
+            await deepseek.finish("呜呜呜出bug了呜呜呜")
     
-    if answer:
-        await deepseek.finish(answer)
-    else:
-        await deepseek.finish("呜呜呜出bug了呜呜呜")
+    except Exception as e:
+        await deepseek.finish(f"呜呜呜出bug了呜呜呜\n{e}")
