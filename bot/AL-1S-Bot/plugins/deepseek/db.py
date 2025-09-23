@@ -27,7 +27,7 @@ def init_db():
             conn.commit()
 
 def save_message(user_id: str, message: str, answer: str):
-    with closing(sqlite3.connect('chat.db')) as conn:
+    with closing(sqlite3.connect('deepseek.db')) as conn:
         with conn:
             conn.execute(
                 'INSERT INTO chat_history (user_id, message, answer) VALUES (?, ?, ?)', 
@@ -36,7 +36,7 @@ def save_message(user_id: str, message: str, answer: str):
             conn.commit()
 
 def get_user_intro(user_id: str) -> str:
-    with closing(sqlite3.connect('chat.db')) as conn:
+    with closing(sqlite3.connect('deepseek.db')) as conn:
         cursor = conn.execute(
             'SELECT intro FROM users WHERE user_id = ?', 
             (user_id)
@@ -45,7 +45,7 @@ def get_user_intro(user_id: str) -> str:
         return row[0] if row else ""
 
 def get_user_description(user_id: str) -> str:
-    with closing(sqlite3.connect('chat.db')) as conn:
+    with closing(sqlite3.connect('deepseek.db')) as conn:
         cursor = conn.execute(
             'SELECT description FROM users WHERE user_id = ?', 
             (user_id)
@@ -54,7 +54,7 @@ def get_user_description(user_id: str) -> str:
         return row[0] if row else ""
     
 def get_user_message(user_id: str) -> str:
-    with closing(sqlite3.connect('chat.db')) as conn:
+    with closing(sqlite3.connect('deepseek.db')) as conn:
         cursor = conn.execute(
             'SELECT message, timestamp, answer FROM chat_history WHERE user_id = ? ORDER BY timestamp DESC LIMIT 20', 
             (user_id)
@@ -67,7 +67,7 @@ def get_user_message(user_id: str) -> str:
         return json.dumps(messages, ensure_ascii=False)
 
 def update_user_intro(user_id: str, intro: str):
-    with closing(sqlite3.connect('chat.db')) as conn:
+    with closing(sqlite3.connect('deepseek.db')) as conn:
         with conn:
             cursor = conn.execute(
                 'SELECT id FROM users WHERE user_id = ?', 
@@ -86,13 +86,13 @@ def update_user_intro(user_id: str, intro: str):
             conn.commit()
 
 def show_db():
-    with closing(sqlite3.connect('chat.db')) as conn:
+    with closing(sqlite3.connect('deepseek.db')) as conn:
         cursor = conn.execute('SELECT user_id, message, answer, timestamp FROM chat_history ORDER BY timestamp DESC LIMIT 10')
         rows = cursor.fetchall()
         return "\n".join([f'user: {short(row[0])} \nmessage: {short(row[1])} \nanswer: {short(row[2])} \ntimastamp: {row[3]}' for row in rows])
 
 def clear_db():
-    with closing(sqlite3.connect('chat.db')) as conn:
+    with closing(sqlite3.connect('deepseek.db')) as conn:
         with conn:
             conn.execute('DELETE FROM chat_history')
             conn.execute('DELETE FROM users')
