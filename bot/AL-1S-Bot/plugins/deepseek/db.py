@@ -130,3 +130,17 @@ def cancel_register(user_id: str):
                 (user_id,)
             )
             conn.commit()
+
+def clear_last_message():
+    with closing(sqlite3.connect(db_path)) as conn:
+        with conn:
+            cursor = conn.execute(
+                'SELECT MAX(id) FROM chat_history'
+            )
+            last_message = cursor.fetchone()
+            if last_message:
+                conn.execute(
+                    'DELETE FROM chat_history WHERE id = (SELECT MAX(id) FROM chat_history)'
+                )
+                conn.commit()
+            return str(last_message[0])
