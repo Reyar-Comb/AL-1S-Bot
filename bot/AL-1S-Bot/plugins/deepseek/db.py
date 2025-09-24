@@ -143,4 +143,4 @@ def clear_last_message():
                     'DELETE FROM chat_history WHERE id = (SELECT MAX(id) FROM chat_history)'
                 )
                 conn.commit()
-            return str(last_message[0])
+            return str(last_message["message"])
