@@ -135,7 +135,7 @@ def clear_last_message():
     with closing(sqlite3.connect(db_path)) as conn:
         with conn:
             cursor = conn.execute(
-                'SELECT MAX(id) FROM chat_history'
+                'SELECT * FROM chat_history WHERE id = (SELECT MAX(id) FROM chat_history)'
             )
             last_message = cursor.fetchone()
             if last_message:
@@ -143,4 +143,4 @@ def clear_last_message():
                     'DELETE FROM chat_history WHERE id = (SELECT MAX(id) FROM chat_history)'
                 )
                 conn.commit()
-            return last_message[0]
+            return str(last_message[0])
