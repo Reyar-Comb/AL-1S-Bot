@@ -76,7 +76,7 @@ async def Answer(event: Event):
                 answer = None     
             elif "delete" in user_message:
                 last_message: str = db.clear_last_message()
-                await deepseek.finish(f"爱丽丝删除了这条记录哦\n{short(last_message)}")
+                await deepseek.finish(f"爱丽丝删除了这条记录哦\n\"{short(last_message)}\"")
 
         elif "-help" in user_message:
             sleep(1)
