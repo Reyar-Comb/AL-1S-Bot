@@ -27,7 +27,7 @@ async def mew_handle(event: Event):
         await mew.finish(MessageSegment.at(id) + MessageSegment.text(" 喵~"))
 
     elif id == config.friend_id:  # type: ignore
-        await mew.finish(MessageSegment.at(id) + MessageSegment.text(" 喵呜~"))
+        await mew.finish(MessageSegment.at(id) + MessageSegment.text(" 你好喵~"))
 
     else:
         t = random.randint(1, 10)
