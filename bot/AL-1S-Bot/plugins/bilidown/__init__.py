@@ -23,6 +23,8 @@ async def download_handle(event: Event):
     id = event.get_user_id()
     url = str(event.get_message()).strip()
     await download.send(MessageSegment.at(id) + MessageSegment.text("视频开始下载..."))
+    if "bilibili.com/video/" not in url:
+        await download.finish(MessageSegment.at(id) + MessageSegment.text("请输入有效的B站视频链接!"))
     bvid = url.split("bilibili.com/video/")[1].split("?")[0].split("/")[0]
     cmd = ["BBDown", url, "--work-dir /root/Video/", bvid]
     process = await subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
