@@ -16,7 +16,7 @@ __plugin_meta__ = PluginMetadata(
 
 config = get_plugin_config(Config)
 
-download = on_command("/Download")
+download = on_command("Download")
 
 @download.handle()
 async def download_handle(event: Event):
